@@ -1,0 +1,177 @@
+<!doctype html>
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#FFF0F5">
+<title>Saskii’s Cozy Little Garden</title>
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;700&family=Nunito:wght@400;600;700&family=Caveat:wght@500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div id="sky" aria-hidden="true"><div class="cloud" style="top:12%"></div><div class="cloud" style="top:38%;animation-delay:-30s"></div></div>
+<div id="hill" aria-hidden="true"></div>
+<nav id="bar" class="glass" hidden aria-label="Navigasi">
+  <button class="btn sm" onclick="history.back()">← Back</button>
+  <button class="btn sm main" data-go="map">🗺 Home</button>
+  <span class="sp"></span>
+  <span id="mi" aria-hidden="true">♪</span>
+  <button class="btn sm" id="mp" aria-label="Putar atau jeda musik">▶</button>
+  <input id="vol" type="range" min="0" max="1" step=".05" value=".25" aria-label="Volume musik">
+  <button class="btn sm" id="sf" aria-label="Efek suara aktif" title="Efek suara">🔔</button>
+  <button class="btn sm" id="cm" aria-pressed="false" title="Kurangi animasi">✨</button>
+</nav>
+
+<main>
+<section class="pg" id="welcome">
+  <div class="polaroid"><img data-ph="face" alt="Foto Saskii berkerudung cokelat"><em>Saskii ♡</em></div>
+  <h1>Haii Saskii Cantikk! ♡</h1>
+  <div class="gclock glass"></div>
+  <p class="hand greet"></p><p class="hand">Welcome to your little world.</p>
+  <p class="glass card">Aku membuat tempat kecil ini khusus untuk kamu. Di sini kamu boleh tersenyum, tertawa, bercerita, bermain, atau sekadar beristirahat sebentar.<br><br>Jadi, jangan buru-buru yaa. Nikmati setiap sudut kecil yang sudah aku siapkan buat kamu.</p>
+  <p class="hand">Are you ready, pretty girl?</p>
+  <button class="btn main big" id="start">Let’s Explore My Little World ♡</button>
+  <p class="muted"><small>“A tiny world where you can feel, smile, play, and simply be yourself.♡”</small></p>
+</section>
+
+<section class="pg" id="map">
+  <h2>Little Garden Map</h2>
+  <div class="gclock glass"></div>
+  <p class="hand greet"></p>
+  <p class="muted">Ketuk tempat mana saja, jangan buru-buru yaa. Yang berkilau ✨ belum kamu kunjungi.</p>
+  <div class="mapbox" id="mapbox"></div>
+</section>
+
+<section class="pg" id="feelings">
+  <h2>Garden of Feelings</h2>
+  <h3>How’s Your Little Heart Today?</h3>
+  <p class="muted">Hari ini kamu sedang merasa apa, Saskii? Apa pun jawabannya, nggak ada perasaan yang salah di sini. ♡</p>
+  <div class="grid" id="moods"></div>
+</section>
+
+<section class="pg" id="letter">
+  <h2>A Little Letter for You ♡</h2>
+  <p class="muted">Ketuk segel hatinya ♡</p>
+  <div id="wrap"><button class="env" id="env" aria-label="Buka amplop"><span class="flap"></span><span class="seal">💗</span></button><div class="paper hand" id="paper"></div></div>
+  <button class="btn" id="again">Read Again</button>
+  <button class="btn" id="hug1">A Little Hug</button>
+  <button class="btn main" data-go="playroom">Continue</button>
+  <button class="btn" data-go="feelings">Pilih mood lain</button>
+</section>
+
+<section class="pg" id="playroom">
+  <h2>The Little Playroom</h2>
+  <h3>Let’s Play Something, Saskii!</h3>
+  <p class="muted">Kayaknya kita butuh sedikit kesenangan hari ini. Pilih permainan yang kamu suka!</p>
+  <div class="grid">
+    <button class="tile glass" data-go="memory"><b>🌸</b>Memory Garden<br><small>Mencocokkan kartu lucu</small></button>
+    <button class="tile glass" data-go="pop"><b>💗</b>Pop the Hearts<br><small>Pecahkan hati yang bermunculan</small></button>
+    <button class="tile glass" data-go="stars"><b>⭐</b>Catch the Stars<br><small>Tangkap bintang-bintang kecil</small></button>
+    <button class="tile glass" data-go="quiz"><b>💭</b>Little Quiz<br><small>Pertanyaan receh dan kejutan</small></button>
+  </div>
+</section>
+
+<section class="pg" id="memory">
+  <h2>Memory Garden</h2>
+  <p id="minfo"></p>
+  <div class="cards" id="mgrid"></div>
+  <p id="mmsg" class="hand"></p>
+  <button class="btn" data-go="playroom">Game lain</button>
+</section>
+<section class="pg" id="pop"></section>
+<section class="pg" id="stars"></section>
+
+<section class="pg" id="quiz">
+  <h2>A Little Quiz About You!</h2>
+  <p class="muted">Jangan tegang yaa, ini bukan ujian. Aku cuma mau lihat jawaban-jawaban random dari kamu. Hehehe.</p>
+  <div id="qbox"></div>
+</section>
+
+<section class="pg" id="memories">
+  <h2>There Are So Many Little Things to Appreciate About You.</h2>
+  <!-- 6 foto Polaroid dibuat otomatis dari array GALLERY di script.js -->
+  <div class="gal" id="gal"></div>
+  <div class="notes" id="notes"></div>
+  <!-- Catatan pribadi Saskii (disimpan di browser lewat localStorage, kode di script.js) -->
+  <div class="mynotes-wrap">
+    <button class="btn mnadd" id="mnadd" aria-expanded="false" aria-controls="mnform">+ Tambah Catatan</button>
+    <div class="mnform glass" id="mnform" hidden>
+      <input id="mnt" placeholder="Judul catatan" maxlength="60" aria-label="Judul catatan">
+      <textarea id="mnb" rows="4" maxlength="500" placeholder="Tulis kata-kata atau kenangan kecilmu di sini…" aria-label="Isi catatan"></textarea>
+      <p id="mnmsg" class="muted" aria-live="polite"></p>
+      <button class="btn main" id="mnsave">Simpan</button><button class="btn" id="mncancel">Batal</button>
+    </div>
+    <div class="notes mynotes" id="mynotes"></div>
+  </div>
+  <p class="hand glass card" id="apmsg"></p>
+</section>
+
+<section class="pg" id="diary">
+  <div class="polaroid sm"><img data-ph="bakery" alt="Foto Saskii memilih roti di toko roti"><em>café time 🥐</em></div>
+  <h2>A Safe Little Corner for Your Thoughts.</h2>
+  <p>Mau cerita sesuatu? Tulis saja. Nggak harus rapi, nggak harus sempurna.</p>
+  
+  <input id="dt" placeholder="Judul" maxlength="80" aria-label="Judul">
+  <textarea id="db" rows="5" placeholder="Hari ini aku ingin cerita…" aria-label="Isi catatan"></textarea>
+  <button class="btn main" id="dsave">Save</button><button class="btn" id="dl">Unduh .txt</button>
+  <p id="dmsg" class="muted" aria-live="polite"></p>
+  <div id="dlist"></div>
+</section>
+
+<section class="pg" id="tree">
+  <h2>A Little Surprise 🌳</h2>
+  <p class="muted">Buka kapan pun kamu mau ♡</p>
+  <button class="btn" data-s="surprise">🎁 Surprise Button</button>
+  <button class="btn" data-s="affirm">🌷 Daily Affirmation</button>
+  <button class="btn" data-s="compliment">💖 Little Compliment</button>
+  <button class="btn" data-s="hug">🤗 Virtual Hug</button>
+  <button class="btn" data-s="secret">✉ Secret Envelope</button>
+  <div class="glass card hand" id="sout" aria-live="polite">Pilih salah satu ya ♡</div>
+</section>
+
+<section class="pg" id="closing">
+  <div class="big-e">🌙</div>
+  <h1>Thank You for Visiting My Little World, Saskii ♡</h1>
+  <p class="glass card" id="cmsg"></p>
+  <button class="btn main big" data-go="map">Visit My Little World Again</button>
+</section>
+</main>
+
+<div id="mochi" role="button" tabindex="0" aria-label="Mochi si kelinci. Ketuk untuk menyapa">
+  <svg viewBox="0 0 120 140" aria-hidden="true">
+    <g class="all">
+      <g class="ear l"><g class="sway"><ellipse cx="44" cy="36" rx="11" ry="30" fill="#fff" stroke="#e9a6b8" stroke-width="2"/><ellipse cx="44" cy="38" rx="4.5" ry="20" fill="#ffc2d1"/></g></g>
+      <g class="ear r"><g class="sway"><ellipse cx="76" cy="36" rx="11" ry="30" fill="#fff" stroke="#e9a6b8" stroke-width="2"/><ellipse cx="76" cy="38" rx="4.5" ry="20" fill="#ffc2d1"/></g></g>
+      <g stroke="#e9a6b8" stroke-width="2"><ellipse cx="60" cy="106" rx="36" ry="30" fill="#fff"/><ellipse cx="60" cy="76" rx="38" ry="32" fill="#fff"/></g>
+      <g class="eyes"><ellipse class="eye" cx="47" cy="74" rx="3.5" ry="4.5" fill="#5A3A42"/><ellipse class="eye" cx="73" cy="74" rx="3.5" ry="4.5" fill="#5A3A42"/></g>
+      <circle class="chk" cx="36" cy="84" r="6" fill="#ff7fab"/><circle class="chk" cx="84" cy="84" r="6" fill="#ff7fab"/>
+      <path d="M55 84q5 4 10 0" stroke="#5A3A42" stroke-width="2" fill="none" stroke-linecap="round"/>
+      <ellipse class="tear" cx="47" cy="84" rx="2.5" ry="4" fill="#8cc8ff"/>
+      <path d="M60 104l-17-10v20zM60 104l17-10v20z" fill="#c2185b"/><circle cx="60" cy="104" r="4" fill="#e91e8c"/>
+    </g>
+  </svg>
+  <div id="say" class="glass" aria-live="polite"></div>
+</div>
+
+<!-- ===== Dock kanan-bawah: Mood Soundscape + P3K Emosi ===== -->
+<div id="dock">
+  <div class="snd glass" role="group" aria-label="Mood Soundscape">
+    <button class="sb" data-snd="rain" aria-pressed="false" aria-label="Suara hujan">🌧️<span> Hujan</span></button>
+    <button class="sb" data-snd="cafe" aria-pressed="false" aria-label="Suasana kafe">☕<span> Kafe</span></button>
+    <button class="sb" data-snd="lofi" aria-pressed="false" aria-label="Musik lo-fi">🎧<span> Lo-fi</span></button>
+  </div>
+  <button class="btn main" id="sos">P3K Emosi 🤍</button>
+</div>
+
+<!-- ===== Overlay latihan napas 4-7-8 ===== -->
+<div id="breath" role="dialog" aria-modal="true" aria-labelledby="bt">
+  <h2 id="bt" aria-live="polite">Tarik napas pelan…</h2>
+  <div id="bn" aria-hidden="true"></div>
+  <div id="bc" aria-hidden="true"></div>
+  <p class="muted">Teknik 4-7-8: tarik 4 detik · tahan 7 detik · hembuskan 8 detik</p>
+  <button class="btn main" id="bx">Udah mendingan 🌸</button>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>
